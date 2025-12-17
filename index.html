@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio BTS SIO - Sourakhata Sidibe</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --primary-color: #00ff9d;
+            --secondary-color: #0a192f;
+            --text-color: #e6f1ff;
+            --light-text: #8892b0;
+            --background: #0a192f;
+            --section-bg: #112240;
+            --card-bg: #1d3461;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        :root[data-theme="light"] {
+            --primary-color: #0077b6;
+            --secondary-color: #f8f9fa;
+            --text-color: #343a40;
+            --light-text: #6c757d;
+            --background: #ffffff;
+            --section-bg: #f8f9fa;
+            --card-bg: #e9ecef;
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: auto; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--primary-color), #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--primary-color); }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 255, 157, 0.1);
+        }
+
+        .nav-content {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+
+        .logo a {
+            font-size: 1.5rem; font-weight: 700; color: var(--primary-color);
+            text-decoration: none; letter-spacing: 1px; cursor: pointer;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+
+        .nav-links a {
+            color: var(--text-color); text-decoration: none; font-weight: 500;
+            transition: var(--transition); position: relative; cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0;
+            height: 2px; background: var(--primary-color); transition: var(--transition);
+        }
+
+        /* Classe active pour le menu */
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
+
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .hamburger span { width: 30px; height: 3px; background: var(--text-color); transition: var(--transition); }
+
+        /* --- PAGE LOGIC (SPA EFFECT) --- */
+        /* Par défaut, on cache toutes les sections */
+        section {
+            display: none;
+            padding: 8rem 0 4rem 0; /* Padding top pour compenser la navbar fixe */
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* La section Hero est spéciale, elle prend 100vh et est centrée */
+        section.hero {
+            padding: 0;
+            display: none; /* Caché par défaut comme les autres */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Quand une section a la classe "active", on l'affiche */
+        section.active {
+            display: block;
+        }
+        
+        section.hero.active {
+            display: flex; /* Flex pour le centrage vertical */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- COMPONENTS --- */
+        /* Buttons */
+        .btn {
+            display: inline-block; padding: 0.8rem 2rem; border-radius: 5px;
+            text-decoration: none; font-weight: 500; transition: var(--transition);
+            margin: 0.5rem; cursor: pointer; border: none; font-size: 1rem;
+        }
+        .btn.primary { background: var(--primary-color); color: var(--secondary-color); }
+        .btn.secondary { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 255, 157, 0.2); }
+
+        /* Animation Machine à écrire */
+        .typing-text { color: var(--primary-color); font-weight: 600; }
+        .cursor { display: inline-block; width: 3px; background-color: var(--text-color); margin-left: 5px; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- SECTIONS SPECIFIC STYLES --- */
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--secondary-color) 0%, var(--background) 100%); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,255,157,0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .hero-content { max-width: 800px; position: relative; z-index: 1; }
+        .subtitle { font-size: 1.5rem; color: var(--light-text); margin-bottom: 2rem; min-height: 1.6em; }
+
+        /* About */
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-image img { width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 255, 157, 0.1); border: 2px solid rgba(255, 255, 255, 0.1); }
+        .about-text ul { list-style: none; margin-top: 1rem; }
+        .about-text ul li { position: relative; padding-left: 25px; margin-bottom: 0.8rem; }
+        .about-text ul li::before { content: '▹'; position: absolute; left: 0; color: var(--primary-color); }
+
+        /* --- STYLE SPÉCIFIQUE SECTION CV --- */
+        .cv-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .cv-text-col p { font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-color); }
+
+        .cv-download-btn {
+            background-color: #00ff9d !important;
+            color: #0a192f !important;
+            font-weight: 700;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
+        }
+        .cv-download-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 255, 157, 0.4); }
+
+        .cv-card-styled {
+            background-color: #172a45;
+            border-radius: 8px;
+            padding: 2.5rem;
+            border-left: 5px solid #00ff9d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex; flex-direction: column; gap: 2rem;
+        }
+
+        .cv-block-title {
+            color: #00ff9d; font-size: 1.2rem; margin-bottom: 0.8rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .cv-block-title i { font-size: 1.1rem; }
+
+        .cv-block-content { padding-left: 10px; margin-left: 7px; border-left: 1px solid rgba(0, 255, 157, 0.1); }
+        .cv-block-content h4 { color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; text-transform: uppercase; }
+        .cv-date { display: block; color: #00ff9d; font-size: 0.9rem; margin-bottom: 0.3rem; font-weight: 500; }
+        .cv-location { color: #8892b0; font-size: 0.95rem; }
+
+        .cv-tags-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0.5rem; }
+        .cv-tag {
+            background-color: rgba(0, 255, 157, 0.1); color: #00ff9d;
+            padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .cv-tag:hover { background-color: rgba(0, 255, 157, 0.2); }
+
+        /* --- STYLE SPÉCIFIQUE CERTIFICATIONS --- */
+        .certifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .certification-card {
+            background-color: #172a45; /* Même bleu que la carte CV */
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        .certification-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
+
+        .certification-logo {
+            width: 60px;
+            height: 60px;
+            background: #00ff9d; /* Cercle vert vif */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .certification-logo i { font-size: 1.8rem; color: #0a192f; /* Icone foncée */ }
+
+        .certification-content h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
+        .certification-content p { font-size: 0.95rem; color: #8892b0; margin-bottom: 1.5rem; line-height: 1.5; }
+
+        .certification-date {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 157, 0.15); /* Pillule fond vert transparent */
+            color: #00ff9d; /* Texte vert */
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Skills, Projects Grid */
+        .skills-grid, .projects-grid, .tech-watch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        /* Cards Generic */
+        .skill-card, .project-card, .tech-watch-card {
+            background: var(--card-bg); border-radius: 10px; padding: 2rem;
+            transition: var(--transition); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.05);
+        }
+        .skill-card:hover, .project-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
+        
+        .skill-card { text-align: center; }
+        .skill-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        
+        .project-card { padding: 0; overflow: hidden; }
+        .project-image img { width: 100%; height: 200px; object-fit: cover; }
+        .project-info { padding: 1.5rem; }
+        .project-tech span { background: rgba(0, 255, 157, 0.1); color: var(--primary-color); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-right: 5px; }
+
+        /* Contact */
+        .contact-content { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-color); border-radius: 5px; }
+        .info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .info-item i { color: var(--primary-color); font-size: 1.2rem; }
+
+        /* Footer */
+        .footer { background: var(--section-bg); padding: 2rem 0; text-align: center; margin-top: auto; }
+        .social-links { margin-bottom: 1rem; }
+        .social-links a { color: var(--text-color); font-size: 1.5rem; margin: 0 10px; transition: var(--transition); }
+        .social-links a:hover { color: var(--primary-color); }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: var(--card-bg); width: 90%; max-width: 900px; height: 90vh; border-radius: 10px; display: flex; flex-direction: column; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-color); z-index: 10; }
+        .cv-viewer { flex: 1; width: 100%; }
+        .cv-viewer iframe { width: 100%; height: 100%; border: none; }
+
+        /* Theme Toggle */
+        .theme-toggle { margin-left: 20px; cursor: pointer; font-size: 1.2rem; }
+        .theme-toggle .fa-sun { display: none; }
+        :root[data-theme="light"] .theme-toggle .fa-moon { display: none; }
+        :root[data-theme="light"] .theme-toggle .fa-sun { display: block; color: orange; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--secondary-color); flex-direction: column; padding: 2rem; text-align: center; }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+            .about-content, .contact-content, .cv-content { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            .cv-text-col { text-align: center; margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <a onclick="navigateTo('home')">Portfolio</a>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="navigateTo('home')" class="active" data-target="home">Accueil</a></li>
+                <li><a onclick="navigateTo('about')" data-target="about">À propos</a></li>
+                <li><a onclick="navigateTo('cv')" data-target="cv">CV</a></li>
+                <li><a onclick="navigateTo('skills')" data-target="skills">Compétences</a></li>
+                <li><a onclick="navigateTo('projects')" data-target="projects">Projets</a></li>
+                <li><a onclick="navigateTo('certifications')" data-target="certifications">Certifs</a></li>
+                <li><a onclick="navigateTo('tech-watch')" data-target="tech-watch">Veille</a></li>
+                <li><a onclick="navigateTo('contact')" data-target="contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" role="button">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="home" class="hero active">
+            <div class="hero-content">
+                <h1 class="animate-text">Sourakhata Sidibe</h1>
+                <p class="subtitle">Je suis <span class="typing-text"></span><span class="cursor"> </span></p>
+                <div class="cta-buttons">
+                    <button onclick="navigateTo('projects')" class="btn primary">Voir mes projets</button>
+                    <button onclick="navigateTo('contact')" class="btn secondary">Me contacter</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>À propos de moi</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Je suis un étudiant passionné en <strong>BTS SIO (Services Informatiques aux Organisations)</strong>, spécialisé en <strong>SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</strong>.</p>
+                        <p>Mon objectif est de développer des compétences solides en administration des systèmes et des réseaux pour garantir la sécurité et les performances des infrastructures informatiques.</p>
+                        <p>Actuellement en formation, je développe mes compétences en :</p>
+                        <ul>
+                            <li>Administration et maintenance des systèmes Windows Server et Linux</li>
+                            <li>Configuration et sécurisation des infrastructures réseau</li>
+                            <li>Déploiement de solutions de virtualisation et cloud computing</li>
+                            <li>Mise en place de stratégies de sécurité et de continuité d'activité</li>
+                            <li>Automatisation via scripting (PowerShell, Bash)</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/82675740-closed-transparent-lock-on-blue-cyber-digital-code-background-computer-internet-data-security.jpg" alt="Profile">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv">
+            <div class="container">
+                <h2>Mon CV</h2>
+                <div class="cv-content">
+                    <div class="cv-text-col">
+                        <p>Consultez mon CV pour plus de détails sur mon parcours académique, mes compétences techniques, et mes expériences professionnelles.</p>
+                        <button class="btn primary cv-download-btn" id="openCVBtn">
+                            <i class="fas fa-eye"></i> Consulter mon CV
+                        </button>
+                    </div>
+
+                    <div class="cv-card-styled">
+                        <div class="cv-block">
+                            <h3 class="cv-block-title"><i class="fas fa-user-graduate"></i> Formation</h3>
+                            <div class="cv-block-content">
+                                <div style="margin-bottom: 2rem;">
+                                    <h4>BTS SIO - Option SISR</h4>
+                                    <span class="cv-date">2024 - 2026</span>
+                                    <p class="cv-location">Lycée René Descartes, Paris</p>
+                                </div>
+                                <div>
+                                    <h4>BACCALAURÉAT PROFESSIONNEL SN INFORMATIQUE</h4>
+                                    <span class="cv-date">De 2021 à 2024</span>
+                                    <p class="cv-location">Lycée Louis Armand , 75015, Paris</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-block">
+                            <h3 class="cv-block-title"><i class="fas fa-briefcase"></i> Expérience</h3>
+                            <div class="cv-block-content">
+                                <h4>Stagiaire chez Sinatek Gaming</h4>
+                                <span class="cv-date">Septembre 2023 - octobre 2023</span>
+                                <p class="cv-location">Sinatek Gaming 75012, Paris</p>
+                            </div>
+                        </div>
+
+                        <div class="cv-block">
+                            <h3 class="cv-block-title"><i class="fas fa-laptop-code"></i> Compétences Clés</h3>
+                            <div class="cv-tags-container">
+                                <span class="cv-tag">Administration Système</span>
+                                <span class="cv-tag">Réseaux</span>
+                                <span class="cv-tag">Sécurité</span>
+                                <span class="cv-tag">Virtualisation</span>
+                                <span class="cv-tag">Support Technique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Mes Compétences</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-desktop"></i>
+                        <h3>SysAdmin</h3>
+                        <p>Windows, Linux</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Réseau</h3>
+                        <p>Cisco, VLAN, Routing</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Sécurité</h3>
+                        <p>Firewall, VPN, Fail2Ban</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Scripting</h3>
+                        <p>Python, Bash, PowerShell</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Mes Projets</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/project3.jpg" alt="Lab SSH">
+                        </div>
+                        <div class="project-info">
+                            <h3>Lab SSH & Fail2ban</h3>
+                            <p>Sécurisation serveur, script brute-force et défense.</p>
+                            <div class="project-tech">
+                                <span>Linux</span><span>Python</span><span>Secu</span>
+                            </div>
+                            <br>
+                            <a href="documents/B3-LAB3-SSH-FAIL2BAN.pdf" target="_blank" class="btn secondary" style="font-size:0.8rem">Voir PDF</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/project2.jpg" alt="Lab Recon">
+                        </div>
+                        <div class="project-info">
+                            <h3>Reconnaissance Réseau</h3>
+                            <p>Audit de surface d'attaque (Nmap, Hydra, Wireshark).</p>
+                            <div class="project-tech">
+                                <span>Nmap</span><span>Wireshark</span>
+                            </div>
+                            <br>
+                            <a href="documents/B2-LAB2-RESEAU-SECURITE.pdf" target="_blank" class="btn secondary" style="font-size:0.8rem">Voir PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <div class="container">
+                <h2>Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="certification-logo">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>BTS SIO – SISR</h3>
+                            <p>Services Informatiques aux Organisations - Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                            <span class="certification-date">2024 - 2026</span>
+                        </div>
+                    </div>
+                    <div class="certification-card">
+                        <div class="certification-logo">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Cybersécurité</h3>
+                            <p>Formation aux bonnes pratiques et aux techniques de sécurisation des infrastructures</p>
+                            <span class="certification-date">2024 - 2026</span>
+                        </div>
+                    </div>
+                    <div class="certification-card">
+                        <div class="certification-logo">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Cisco CCNA</h3>
+                            <p>Configuration, dépannage et sécurisation des réseaux avec les équipements Cisco</p>
+                            <span class="certification-date">2024 - 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-watch">
+            <div class="container">
+                <h2>Veille Technologique</h2>
+                <div class="tech-watch-grid">
+                    <div class="tech-watch-card">
+                        <div class="tech-watch-icon" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Sujet : Législation & Éthique en Cybersécurité</h3>
+                        <p>Suivi des évolutions réglementaires (NIS 2, RGPD, LPM) et des dilemmes éthiques liés à la surveillance, la protection des données et l'usage des outils offensifs.</p>
+                        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+                        <p style="font-size: 0.9rem; color: var(--light-text)">Sources : CNIL, ANSSI, Legifrance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Me Contacter</h2>
+                <div class="contact-content">
+                    <form class="contact-form">
+                        <div class="form-group"><input type="text" name="name" placeholder="Nom" required></div>
+                        <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+                        <div class="form-group"><textarea name="message" placeholder="Votre message..." required rows="5"></textarea></div>
+                        <button type="submit" class="btn primary">Envoyer</button>
+                    </form>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i> <span>sourakhata.sidibe.pro@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i> <span>07 49 50 51 17</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i> <span>Paris, France</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/S2-750" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sourakhata-sidibe-0b113633b" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>© 2024 Sourakhata Sidibe. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <div id="cvModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="cv-viewer">
+                <iframe src="documents/CV_2025-12-08_SOURAKHATA_SIDIBE.pdf" title="CV Viewer"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ROUTER LOGIC (SPA) ---
+        function navigateTo(sectionId) {
+            // 1. Cacher toutes les sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // 2. Afficher la section demandée
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo(0, 0); // Remonter en haut de page
+            }
+
+            // 3. Mettre à jour le menu actif
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('data-target') === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 4. Fermer le menu mobile si ouvert
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            if(navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        }
+
+        // --- TYPEWRITER EFFECT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const typingElement = document.querySelector('.typing-text');
+            if (!typingElement) return;
+
+            const words = ["Étudiant BTS SIO", "Admin Système", "Passionné Cyber", "Futur Expert"];
+            let wordIndex = 0, charIndex = 0, isDeleting = false;
+
+            function type() {
+                const currentWord = words[wordIndex];
+                if (isDeleting) {
+                    typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    typeSpeed = 500;
+                }
+                setTimeout(type, typeSpeed);
+            }
+            type();
+        });
+
+        // --- GLOBAL UI SCRIPTS ---
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const root = document.documentElement;
+        themeToggle.addEventListener('click', () => {
+            const current = root.getAttribute('data-theme');
+            root.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+        });
+
+        // CV Modal Logic
+        const modal = document.getElementById('cvModal');
+        const btn = document.getElementById('openCVBtn');
+        const span = document.getElementsByClassName("close-modal")[0];
+
+        if(btn) {
+            btn.onclick = function() { modal.classList.add('show'); }
+        }
+        if(span) {
+            span.onclick = function() { modal.classList.remove('show'); }
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) { modal.classList.remove('show'); }
+        }
+
+        // Contact Form (Simulation)
+        const form = document.querySelector('.contact-form');
+        if(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Ici tu mettras ton code EmailJS
+                const btn = form.querySelector('button');
+                const originalText = btn.innerText;
+                btn.innerText = "Envoi...";
+                setTimeout(() => {
+                    alert("Message envoyé !");
+                    form.reset();
+                    btn.innerText = originalText;
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
