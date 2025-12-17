@@ -627,31 +627,54 @@
             const typingElement = document.querySelector('.typing-text');
             if (!typingElement) return;
 
-            const words = ["Étudiant BTS SIO", "Admin Système", "Passionné Cyber", "Futur Expert"];
-            let wordIndex = 0, charIndex = 0, isDeleting = false;
+            // --- PHRASES CORRIGÉES ICI ---
+            const words = [
+                "étudiant en BTS SIO option SISR.", 
+                "futur Administrateur Systèmes et Réseaux.", 
+                "passionné par la Cybersécurité.", 
+                "en formation d'Expert Infrastructure."
+            ];
+            
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
 
             function type() {
                 const currentWord = words[wordIndex];
+                
+                // Si on efface
                 if (isDeleting) {
                     typingElement.textContent = currentWord.substring(0, charIndex - 1);
                     charIndex--;
-                } else {
+                } 
+                // Si on écrit
+                else {
                     typingElement.textContent = currentWord.substring(0, charIndex + 1);
                     charIndex++;
                 }
 
-                let typeSpeed = isDeleting ? 50 : 100;
+                // Vitesse de frappe (plus rapide pour effacer)
+                let typeSpeed = isDeleting ? 40 : 80;
 
+                // Si le mot est fini d'écrire
                 if (!isDeleting && charIndex === currentWord.length) {
                     isDeleting = true;
-                    typeSpeed = 2000;
-                } else if (isDeleting && charIndex === 0) {
+                    typeSpeed = 2000; // Pause avant d'effacer
+                } 
+                // Si le mot est fini d'effacer
+                else if (isDeleting && charIndex === 0) {
                     isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                    typeSpeed = 500;
+                    wordIndex++;
+                    if (wordIndex >= words.length) {
+                        wordIndex = 0;
+                    }
+                    typeSpeed = 500; // Pause avant le prochain mot
                 }
+
                 setTimeout(type, typeSpeed);
             }
+
+            // Lancer l'animation
             type();
         });
 
