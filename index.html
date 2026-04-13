@@ -213,47 +213,6 @@
         }
         .cv-tag:hover { background-color: rgba(0, 255, 157, 0.2); }
 
-        /* --- STYLE SPÉCIFIQUE CERTIFICATIONS --- */
-        .certifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        
-        .certification-card {
-            background-color: #172a45; /* Même bleu que la carte CV */
-            border-radius: 8px;
-            padding: 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-        .certification-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
-
-        .certification-logo {
-            width: 60px;
-            height: 60px;
-            background: #00ff9d; /* Cercle vert vif */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .certification-logo i { font-size: 1.8rem; color: #0a192f; /* Icone foncée */ }
-
-        .certification-content h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
-        .certification-content p { font-size: 0.95rem; color: #8892b0; margin-bottom: 1.5rem; line-height: 1.5; }
-
-        .certification-date {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(0, 255, 157, 0.15); /* Pillule fond vert transparent */
-            color: #00ff9d; /* Texte vert */
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
         /* Skills, Projects Grid */
         .skills-grid, .projects-grid, .tech-watch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         
@@ -278,6 +237,410 @@
         .form-group input, .form-group textarea { width: 100%; padding: 1rem; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-color); border-radius: 5px; }
         .info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
         .info-item i { color: var(--primary-color); font-size: 1.2rem; }
+
+        /* Contact Cards (Email / Téléphone / Localisation) */
+        .contact-content { display: flex; justify-content: center; }
+        .contact-cards { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(240px, 1fr)); gap: 2rem; align-items: stretch; }
+        .contact-card {
+            background: rgba(29, 52, 97, 0.55);
+            border: 1px solid rgba(0, 255, 157, 0.14);
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 240px;
+        }
+        .contact-card:hover { transform: translateY(-8px); box-shadow: 0 18px 45px rgba(0, 255, 157, 0.12); border-color: rgba(0, 255, 157, 0.28); }
+        .contact-card-icon {
+            width: 60px; height: 60px; margin: 0 auto 1rem; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 255, 157, 0.10); border: 1px solid rgba(0, 255, 157, 0.20);
+        }
+        .contact-card-icon i { font-size: 1.6rem; color: var(--primary-color); }
+        .contact-card-title { margin-bottom: 0.6rem; color: var(--primary-color); font-size: 1.35rem; }
+        .contact-card-value { margin-bottom: 1.2rem; color: var(--light-text); word-break: break-word; }
+        .contact-card-link { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
+        .contact-card-link:hover { color: var(--primary-color); }
+        .contact-card-action.btn.primary {
+            margin: 0; border-radius: 10px; padding: 0.9rem 1.25rem;
+            background: linear-gradient(90deg, var(--primary-color), #00b4d8);
+            color: var(--secondary-color);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.18);
+        }
+        .contact-card-action.btn.primary:hover { box-shadow: 0 14px 32px rgba(0, 255, 157, 0.26); }
+
+        /* --- VEILLE TECHNOLOGIQUE (structure type maquette, thème portfolio) --- */
+        #tech-watch { padding-bottom: 5rem; }
+        #tech-watch .container.veille-container { max-width: 1100px; }
+        #tech-watch .veille-page-title {
+            text-align: left;
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            position: relative;
+        }
+        #tech-watch .veille-page-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 56px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .veille-hero {
+            background: linear-gradient(125deg, var(--secondary-color) 0%, #152a45 45%, var(--card-bg) 100%);
+            border-radius: 16px;
+            padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(0, 255, 157, 0.12);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        }
+        .veille-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 1.25rem;
+        }
+        .veille-badge i { color: var(--primary-color); font-size: 0.7rem; }
+        .veille-hero h3 {
+            font-size: 1.65rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .veille-hero p { color: var(--light-text); font-size: 1rem; line-height: 1.65; max-width: 52rem; }
+
+        .veille-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .veille-stat-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.35rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        .veille-stat-card:hover { transform: translateY(-4px); border-color: rgba(0, 255, 157, 0.25); }
+        .veille-stat-num {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 0.35rem;
+        }
+        .veille-stat-label { font-size: 0.82rem; color: var(--light-text); }
+
+        .veille-def {
+            background: rgba(0, 255, 157, 0.06);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+            margin-bottom: 3rem;
+        }
+        .veille-def h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+        .veille-def p { color: var(--text-color); font-size: 0.95rem; line-height: 1.65; }
+
+        .veille-subhead {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .veille-subhead h3 {
+            font-size: 1.35rem;
+            color: var(--text-color);
+            margin: 0;
+            text-align: left;
+        }
+        .veille-subhead .veille-subhead-icon { font-size: 1.5rem; line-height: 1; }
+        .veille-lead {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 1.25rem;
+        }
+
+        .veille-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 1.5rem;
+        }
+        .veille-filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(29, 52, 97, 0.4);
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+        .veille-filter-btn:hover { border-color: var(--primary-color); color: var(--text-color); }
+        .veille-filter-btn.is-active {
+            background: linear-gradient(90deg, var(--primary-color), #00c9a7);
+            color: var(--secondary-color);
+            border-color: transparent;
+            font-weight: 600;
+        }
+        .veille-filter-btn[data-filter="legislation"] i { color: #fbbf24; }
+        .veille-filter-btn[data-filter="culture"] i { color: #a78bfa; }
+        .veille-filter-btn[data-filter="gouvernance"] i { color: #38bdf8; }
+        .veille-filter-btn.is-active i { color: var(--secondary-color); }
+
+        .veille-articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+        .veille-article-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.25rem 1.35rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+        .veille-article-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 157, 0.25);
+            box-shadow: 0 12px 32px rgba(0, 255, 157, 0.08);
+        }
+        .veille-article-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            margin-bottom: 0.85rem;
+        }
+        .veille-article-tag.t-blue { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; }
+        .veille-article-tag.t-red { background: rgba(248, 113, 113, 0.15); color: #fca5a5; }
+        .veille-article-tag.t-green { background: rgba(52, 211, 153, 0.15); color: #6ee7b7; }
+        .veille-article-tag.t-orange { background: rgba(251, 191, 36, 0.15); color: #fcd34d; }
+        .veille-article-tag.t-grey { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
+        .veille-article-card h4 { font-size: 1.05rem; color: var(--text-color); margin-bottom: 0.6rem; line-height: 1.35; }
+        .veille-article-author {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+        .veille-article-author i { color: #fbbf24; margin-right: 0.35rem; }
+        .veille-article-cta {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .veille-article-expand {
+            display: none;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--light-text);
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+        .veille-article-card.is-open .veille-article-expand { display: block; }
+        .veille-article-expand-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0.25rem;
+            user-select: none;
+        }
+        .veille-article-card.is-open .veille-article-expand-toggle { color: #9ae6b4; }
+        .veille-article-expand-toggle i { font-size: 0.8rem; }
+
+        .veille-tools-block { margin-bottom: 2rem; }
+        .veille-tools-head {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+        .veille-tools-head h3 { font-size: 1.35rem; color: var(--text-color); margin: 0; text-align: left; }
+        .veille-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .veille-tool-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .veille-tool-card:hover { border-color: rgba(0, 255, 157, 0.28); }
+        .veille-tool-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(0, 255, 157, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .veille-tool-icon i { font-size: 1.6rem; color: var(--primary-color); }
+        .veille-tool-card h4 { color: var(--primary-color); font-size: 1.1rem; margin-bottom: 0.65rem; }
+        .veille-tool-card p { font-size: 0.88rem; color: var(--light-text); line-height: 1.55; margin-bottom: 1rem; flex: 1; }
+        .veille-tool-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(0, 255, 157, 0.08) 0%, rgba(10, 25, 47, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0, 255, 157, 0.35);
+            font-size: 2rem;
+        }
+        .veille-tool-preview--screenshot {
+            height: auto;
+            min-height: 0;
+            padding: 6px;
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: block;
+        }
+        .veille-tool-preview--screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        :root[data-theme="light"] .veille-tool-preview--screenshot {
+            background: #fff;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+        .veille-tool-card .btn.primary { margin: 0; font-size: 0.88rem; padding: 0.65rem 1.25rem; }
+
+        .veille-download-wrap { text-align: center; margin-bottom: 3.5rem; }
+        .veille-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--primary-color), #00c9a7);
+            color: var(--secondary-color) !important;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.25);
+            transition: var(--transition);
+        }
+        .veille-download-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0, 255, 157, 0.35); }
+        .veille-download-btn i { font-size: 1.1rem; }
+
+        .veille-conclusion {
+            background: linear-gradient(145deg, #152a45 0%, #0f1729 100%);
+            border-radius: 18px;
+            padding: 2rem 2rem 2.25rem;
+            border: 1px solid rgba(0, 255, 157, 0.12);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        }
+        .veille-conclusion h3 {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .veille-conclusion > p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
+        }
+        .veille-conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .veille-conclusion-card {
+            background: rgba(29, 52, 97, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+        .veille-conclusion-card .emoji { font-size: 1.75rem; display: block; margin-bottom: 0.65rem; }
+        .veille-conclusion-card p { font-size: 0.88rem; color: var(--text-color); line-height: 1.5; margin: 0; }
+
+        :root[data-theme="light"] #tech-watch .veille-hero {
+            background: linear-gradient(125deg, #e9ecef 0%, #dee2e6 100%);
+            border-color: rgba(0, 119, 182, 0.2);
+        }
+        :root[data-theme="light"] #tech-watch .veille-badge {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+        :root[data-theme="light"] #tech-watch .veille-conclusion {
+            background: linear-gradient(145deg, #e9ecef 0%, #dee2e6 100%);
+        }
+        :root[data-theme="light"] #tech-watch .veille-conclusion-card {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        @media (max-width: 992px) {
+            .veille-stats { grid-template-columns: repeat(2, 1fr); }
+            .veille-tools-grid, .veille-conclusion-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 520px) {
+            .veille-stats { grid-template-columns: 1fr; }
+        }
 
         /* Footer */
         .footer { background: var(--section-bg); padding: 2rem 0; text-align: center; margin-top: auto; }
@@ -304,9 +667,14 @@
             .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--secondary-color); flex-direction: column; padding: 2rem; text-align: center; }
             .nav-links.active { display: flex; }
             .hamburger { display: flex; }
-            .about-content, .contact-content, .cv-content { grid-template-columns: 1fr; }
+            .about-content, .cv-content { grid-template-columns: 1fr; }
             h1 { font-size: 2.5rem; }
             .cv-text-col { text-align: center; margin-bottom: 1rem; }
+        }
+
+        @media (max-width: 900px) {
+            .contact-cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+            .contact-card { min-height: auto; }
         }
     </style>
 </head>
@@ -324,7 +692,6 @@
                 <li><a onclick="navigateTo('skills')" data-target="skills">Compétences</a></li>
                 <li><a onclick="navigateTo('projects')" data-target="projects">Projets</a></li>
                 <li><a onclick="navigateTo('stages')" data-target="stages">Stages</a></li>
-                <li><a onclick="navigateTo('certifications')" data-target="certifications">Certifs</a></li>
                 <li><a onclick="navigateTo('tech-watch')" data-target="tech-watch">Veille</a></li>
                 <li><a onclick="navigateTo('contact')" data-target="contact">Contact</a></li>
             </ul>
@@ -520,45 +887,7 @@
                                 <span>BTS SIO</span><span>Stage</span><span>Année 2</span>
                             </div>
                             <br>
-                            <a href="documents/Rapport%20de%20Stage%20Mairie%20des%20clayes%20sous%20bois%202026.pdf" target="_blank" class="btn secondary" style="font-size:0.8rem">Voir PDF</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications">
-            <div class="container">
-                <h2>Certifications</h2>
-                <div class="certifications-grid">
-                    <div class="certification-card">
-                        <div class="certification-logo">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <div class="certification-content">
-                            <h3>BTS SIO – SISR</h3>
-                            <p>Services Informatiques aux Organisations - Solutions d'Infrastructure, Systèmes et Réseaux</p>
-                            <span class="certification-date">2024 - 2026</span>
-                        </div>
-                    </div>
-                    <div class="certification-card">
-                        <div class="certification-logo">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="certification-content">
-                            <h3>Certification Cybersécurité</h3>
-                            <p>Formation aux bonnes pratiques et aux techniques de sécurisation des infrastructures</p>
-                            <span class="certification-date">2024 - 2026</span>
-                        </div>
-                    </div>
-                    <div class="certification-card">
-                        <div class="certification-logo">
-                            <i class="fas fa-sitemap"></i>
-                        </div>
-                        <div class="certification-content">
-                            <h3>Certification Cisco CCNA</h3>
-                            <p>Configuration, dépannage et sécurisation des réseaux avec les équipements Cisco</p>
-                            <span class="certification-date">2024 - 2026</span>
+                            <a href="documents/Rapport%20de%20Stage%20Mairie%20des%20clayes%20sous%20bois%202026%20(1)_compressed.pdf" target="_blank" class="btn secondary" style="font-size:0.8rem">Voir PDF</a>
                         </div>
                     </div>
                 </div>
@@ -566,17 +895,171 @@
         </section>
 
         <section id="tech-watch">
-            <div class="container">
-                <h2>Veille Technologique</h2>
-                <div class="tech-watch-grid">
-                    <div class="tech-watch-card">
-                        <div class="tech-watch-icon" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;">
-                            <i class="fas fa-balance-scale"></i>
+            <div class="container veille-container">
+                <h2 class="veille-page-title">Veille technologique</h2>
+
+                <div class="veille-hero">
+                    <span class="veille-badge"><i class="fas fa-graduation-cap"></i> BTS SIO — Option SISR</span>
+                    <h3>🔒 La Législation et l'Éthique en Cybersécurité</h3>
+                    <p>
+                        La législation et l'éthique du numérique constituent l'ensemble des règles juridiques et des principes moraux encadrant la protection des systèmes d'information, des données et des utilisateurs.
+                    </p>
+                </div>
+
+                <div class="veille-stats" aria-label="Indicateurs de la veille">
+                    <div class="veille-stat-card">
+                        <div class="veille-stat-num">6</div>
+                        <div class="veille-stat-label">Articles analysés</div>
+                    </div>
+                    <div class="veille-stat-card">
+                        <div class="veille-stat-num">2</div>
+                        <div class="veille-stat-label">Outils de veille</div>
+                    </div>
+                    <div class="veille-stat-card">
+                        <div class="veille-stat-num">2</div>
+                        <div class="veille-stat-label">Axes principaux</div>
+                    </div>
+                    <div class="veille-stat-card">
+                        <div class="veille-stat-num">∞</div>
+                        <div class="veille-stat-label">Évolution continue</div>
+                    </div>
+                </div>
+
+                <div class="veille-def">
+                    <h4>📖 Qu'est-ce que la veille technologique ?</h4>
+                    <p>
+                        La veille technologique est une démarche structurée visant à surveiller les innovations récentes et leur viabilité sur le marché. Elle repose sur un cycle précis de collecte, de conservation et d'étude de données, fonctionnant comme une revue de presse spécialisée au service de la stratégie technique.
+                    </p>
+                </div>
+
+                <div class="veille-subhead">
+                    <span class="veille-subhead-icon" aria-hidden="true">📰</span>
+                    <h3>Revue de presse — Articles analysés</h3>
+                </div>
+                <p class="veille-lead">Cliquez sur une carte pour afficher le résumé. Filtrez par thématique.</p>
+
+                <div class="veille-filters" role="toolbar" aria-label="Filtrer les articles">
+                    <button type="button" class="veille-filter-btn is-active" data-filter="all"><i class="fas fa-circle"></i> Tous (6)</button>
+                    <button type="button" class="veille-filter-btn" data-filter="legislation"><i class="fas fa-balance-scale"></i> Législation &amp; Souveraineté</button>
+                    <button type="button" class="veille-filter-btn" data-filter="culture"><i class="fas fa-user"></i> Culture &amp; Éthique Hacker</button>
+                    <button type="button" class="veille-filter-btn" data-filter="gouvernance"><i class="fas fa-building"></i> Gouvernance &amp; Réalité</button>
+                </div>
+
+                <div class="veille-articles-grid" id="veilleArticles">
+                    <article class="veille-article-card" data-category="legislation" data-title="Cybersécurité : la France booste la filière (Le Parisien)" data-summary="L'article expose la volonté de l'État de créer un &quot;Airbus de la cybersécurité&quot;. L'objectif est de financer et structurer les entreprises françaises pour assurer notre indépendance technologique face aux géants américains et éviter de dépendre de solutions étrangères pour nos infrastructures critiques. En effet, la France ne représente actuellement qu'environ 4% du marché mondial.">
+                        <span class="veille-article-tag t-orange">⚖️ Législation &amp; Souveraineté</span>
+                        <h4>Cybersécurité : la France booste la filière</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            L'article expose la volonté de l'État de créer un "Airbus de la cybersécurité". L'objectif est de financer et structurer les entreprises françaises pour assurer notre indépendance technologique face aux géants américains et éviter de dépendre de solutions étrangères pour nos infrastructures critiques. En effet, la France ne représente actuellement qu'environ 4% du marché mondial.
                         </div>
-                        <h3>Sujet : Législation & Éthique en Cybersécurité</h3>
-                        <p>Suivi des évolutions réglementaires (NIS 2, RGPD, LPM) et des dilemmes éthiques liés à la surveillance, la protection des données et l'usage des outils offensifs.</p>
-                        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
-                        <p style="font-size: 0.9rem; color: var(--light-text)">Sources : CNIL, ANSSI, Legifrance</p>
+                    </article>
+                    <article class="veille-article-card" data-category="legislation" data-title="L'UE investit pour renforcer sa sécurité (Numerama)" data-summary="Ce rapport détaille le projet de l'Union Européenne visant à financer l'audit des logiciels libres (Open Source). Puisque ces outils sont la base de la plupart des serveurs gouvernementaux, l'UE considère désormais leur sécurité comme un bien commun qu'il faut protéger par des investissements législatifs et financiers massifs.">
+                        <span class="veille-article-tag t-orange">⚖️ Législation &amp; Souveraineté</span>
+                        <h4>L'UE investit pour renforcer sa sécurité</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            Ce rapport détaille le projet de l'Union Européenne visant à financer l'audit des logiciels libres (Open Source). Puisque ces outils sont la base de la plupart des serveurs gouvernementaux, l'UE considère désormais leur sécurité comme un bien commun qu'il faut protéger par des investissements législatifs et financiers massifs.
+                        </div>
+                    </article>
+                    <article class="veille-article-card" data-category="culture" data-title="Why the World Needs Hackers Now (Emergent by Design)" data-summary="Ce texte défend le hacking non pas comme un délit, mais comme un moteur d'innovation sociale. Il explique que dans un système figé, le hacker est celui qui &quot;casse&quot; les codes pour proposer de nouvelles manières de penser et de résoudre des problèmes complexes que les institutions traditionnelles n'arrivent plus à gérer.">
+                        <span class="veille-article-tag t-blue">👤 Culture &amp; Éthique Hacker</span>
+                        <h4>Why the World Needs Hackers Now</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            Ce texte défend le hacking non pas comme un délit, mais comme un moteur d'innovation sociale. Il explique que dans un système figé, le hacker est celui qui "casse" les codes pour proposer de nouvelles manières de penser et de résoudre des problèmes complexes que les institutions traditionnelles n'arrivent plus à gérer.
+                        </div>
+                    </article>
+                    <article class="veille-article-card" data-category="culture" data-title="Hacker ethic (Wikipedia)" data-summary="Ce résumé pose les bases morales du mouvement : le partage d'information, la décentralisation et l'accès libre à la technologie. C'est le fondement du hacking éthique : la conviction que la transparence et la curiosité sont les meilleures armes pour rendre le monde numérique plus sûr pour tous.">
+                        <span class="veille-article-tag t-grey">👤 Culture &amp; Éthique Hacker</span>
+                        <h4>Hacker ethic (Wikipedia)</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            Ce résumé pose les bases morales du mouvement : le partage d'information, la décentralisation et l'accès libre à la technologie. C'est le fondement du hacking éthique : la conviction que la transparence et la curiosité sont les meilleures armes pour rendre le monde numérique plus sûr pour tous.
+                        </div>
+                    </article>
+                    <article class="veille-article-card" data-category="gouvernance" data-title="La cybersécurité, vraiment une priorité pour les dirigeants ? (Le MagIT)" data-summary="L'article pointe un paradoxe : si 90% des patrons disent que la sécurité est vitale, les budgets et les effectifs ne suivent pas toujours. Il met en lumière le besoin d'une meilleure communication entre les techniciens (DSI) et les décideurs pour que la sécurité devienne une culture d'entreprise et non une simple dépense.">
+                        <span class="veille-article-tag t-green">🏢 Gouvernance &amp; Réalité</span>
+                        <h4>La cybersécurité, priorité pour les dirigeants ?</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            L'article pointe un paradoxe : si 90% des patrons disent que la sécurité est vitale, les budgets et les effectifs ne suivent pas toujours. Il met en lumière le besoin d'une meilleure communication entre les techniciens (DSI) et les décideurs pour que la sécurité devienne une culture d'entreprise et non une simple dépense.
+                        </div>
+                    </article>
+                    <article class="veille-article-card" data-category="gouvernance" data-title="Une cyberattaque sur quatre réussit en France (La Tribune)" data-summary="C'est le signal d'alarme de ta revue de presse. Malgré l'achat de logiciels coûteux, 25% des attaques atteignent leur but. La conclusion est claire : la technologie ne suffit pas. La réussite de la défense repose sur la formation humaine et la rapidité de détection des intrusions, bien plus que sur le montant du chèque signé pour l'antivirus.">
+                        <span class="veille-article-tag t-green">🏢 Gouvernance &amp; Réalité</span>
+                        <h4>Une cyberattaque sur quatre réussit en France</h4>
+                        <p class="veille-article-author"><i class="fas fa-pencil-alt"></i> Synthèse — veille documentaire</p>
+                        <span class="veille-article-expand-toggle"><i class="fas fa-play"></i> Cliquez pour lire le résumé</span>
+                        <div class="veille-article-expand" role="region" aria-label="Résumé de l'article">
+                            C'est le signal d'alarme de ta revue de presse. Malgré l'achat de logiciels coûteux, 25% des attaques atteignent leur but. La conclusion est claire : la technologie ne suffit pas. La réussite de la défense repose sur la formation humaine et la rapidité de détection des intrusions, bien plus que sur le montant du chèque signé pour l'antivirus.
+                        </div>
+                    </article>
+                </div>
+
+                <div class="veille-tools-block">
+                    <div class="veille-tools-head">
+                        <span aria-hidden="true">🧰</span>
+                        <h3>Mes outils de veille</h3>
+                    </div>
+                    <div class="veille-tools-grid">
+                        <div class="veille-tool-card">
+                            <div class="veille-tool-icon"><i class="fas fa-bell"></i></div>
+                            <h4>Google Alerts</h4>
+                            <p>Surveillance automatique d'un mot-clé — reçoit des alertes e-mail dès qu'un sujet est mentionné</p>
+                            <div class="veille-tool-preview veille-tool-preview--screenshot">
+                                <img src="images/google-alerts-veille.png" alt="Capture Google Alerts : Mes alertes (7) — mots-clés cybersécurité et droit numérique" width="560" height="400" loading="lazy" decoding="async">
+                            </div>
+                            <a href="https://www.google.fr/alerts" target="_blank" rel="noopener noreferrer" class="btn primary">Consulter →</a>
+                        </div>
+                        <div class="veille-tool-card">
+                            <div class="veille-tool-icon"><i class="fas fa-folder-open"></i></div>
+                            <h4>Pearltrees</h4>
+                            <p>Cartographie et classement des articles et références utiles pour la synthèse finale.</p>
+                            <div class="veille-tool-preview veille-tool-preview--screenshot">
+                                <img src="images/pearltrees-veille.png" alt="Pearltrees : collection La Législation et l'Éthique en Cybersécurité — Cybersécurité et Hacking éthique" width="560" height="400" loading="lazy" decoding="async">
+                            </div>
+                            <a href="https://www.pearltrees.com" target="_blank" rel="noopener noreferrer" class="btn primary">Consulter →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="veille-download-wrap">
+                    <a href="documents/Veille%20Technologie%20terminer.pdf" class="veille-download-btn" download target="_blank" rel="noopener">
+                        <i class="fas fa-file-pdf"></i>
+                        Télécharger le document complet de veille (PDF)
+                    </a>
+                </div>
+
+                <div class="veille-conclusion">
+                    <h3><span aria-hidden="true">💡</span> Conclusion de ma veille</h3>
+                    <p>
+                        Cette veille technologique met en lumière un tournant majeur : la cybersécurité n'est plus un simple défi technique, mais un enjeu de souveraineté législative et de changement culturel.
+                        <br><br>
+                        D'un côté, le cadre légal se durcit et s'organise. On observe une volonté forte, tant au niveau national qu'européen, de financer une filière de sécurité autonome et d'auditer les outils numériques communs pour garantir qu'aucune faille ne reste sans surveillance. La législation pousse désormais les entreprises à sortir de la passivité pour adopter une défense proactive et transparente.
+                        <br><br>
+                        D'un autre côté, le hacking éthique s'impose comme le partenaire indispensable de cette nouvelle stratégie. En réhabilitant l'éthique hacker basée sur le partage, l'ouverture et la créativité, les organisations apprennent à anticiper les menaces plutôt qu'à simplement les subir. L'expert en sécurité, capable de penser comme un attaquant, devient le garant de la résilience face à des menaces qui, bien que de plus en plus complexes, butent souvent sur le même maillon faible : l'humain.
+                        <br><br>
+                        En définitive, la réussite de la protection numérique de demain reposera sur cet équilibre : des lois protectrices qui encouragent l'innovation et une éthique de collaboration qui place l'intelligence humaine au centre de la défense.
+                    </p>
+                    <div class="veille-conclusion-grid">
+                        <div class="veille-conclusion-card">
+                            <span class="emoji" aria-hidden="true">⚔️</span>
+                            <p>Professionnalisation des attaques et exploitation constante des vulnérabilités humaines.</p>
+                        </div>
+                        <div class="veille-conclusion-card">
+                            <span class="emoji" aria-hidden="true">🛡️</span>
+                            <p>Renforcement de la souveraineté numérique et des cadres légaux de protection.</p>
+                        </div>
+                        <div class="veille-conclusion-card">
+                            <span class="emoji" aria-hidden="true">⚖️</span>
+                            <p>Synergie entre la rigueur de la loi et l'agilité créative du hacking éthique.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -586,21 +1069,38 @@
             <div class="container">
                 <h2>Me Contacter</h2>
                 <div class="contact-content">
-                    <form class="contact-form">
-                        <div class="form-group"><input type="text" name="name" placeholder="Nom" required></div>
-                        <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
-                        <div class="form-group"><textarea name="message" placeholder="Votre message..." required rows="5"></textarea></div>
-                        <button type="submit" class="btn primary">Envoyer</button>
-                    </form>
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i> <span>sourakhata.sidibe.pro@gmail.com</span>
+                    <div class="contact-cards" aria-label="Informations de contact">
+                        <div class="contact-card">
+                            <div class="contact-card-icon" aria-hidden="true">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="contact-card-title">Email</h3>
+                            <p class="contact-card-value">
+                                <a class="contact-card-link" href="mailto:sourakhata.sidibe.pro@gmail.com">sourakhata.sidibe.pro@gmail.com</a>
+                            </p>
+                            <a class="btn primary contact-card-action" href="mailto:sourakhata.sidibe.pro@gmail.com">Envoyer un email</a>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i> <span>07 49 50 51 17</span>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon" aria-hidden="true">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 class="contact-card-title">Téléphone</h3>
+                            <p class="contact-card-value">
+                                <a class="contact-card-link" href="tel:+33749505117">07 49 50 51 17</a>
+                            </p>
+                            <a class="btn primary contact-card-action" href="tel:+33749505117">Appeler</a>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i> <span>Paris, France</span>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon" aria-hidden="true">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3 class="contact-card-title">Localisation</h3>
+                            <p class="contact-card-value">
+                                <a class="contact-card-link" href="https://www.google.com/maps/place/Paris,+France/@48.8566,2.3522,12z" target="_blank" rel="noopener noreferrer">Paris, France</a>
+                            </p>
+                            <a class="btn primary contact-card-action" href="https://www.google.com/maps/place/Paris,+France/@48.8566,2.3522,12z" target="_blank" rel="noopener noreferrer">Voir sur la carte</a>
                         </div>
                     </div>
                 </div>
@@ -640,6 +1140,13 @@
             if(target) {
                 target.classList.add('active');
                 window.scrollTo(0, 0); // Remonter en haut de page
+            }
+
+            // 2b. Ré-initialiser la veille (si on vient d'y naviguer)
+            if (sectionId === 'tech-watch') {
+                setTimeout(() => {
+                    if (typeof initVeille === 'function') initVeille();
+                }, 0);
             }
 
             // 3. Mettre à jour le menu actif
@@ -747,6 +1254,49 @@
         window.onclick = function(event) {
             if (event.target == modal) { modal.classList.remove('show'); }
         }
+
+        // Veille : filtres + résumés (déroulant)
+        function initVeille() {
+            const grid = document.getElementById('veilleArticles');
+            const filtersWrap = document.querySelector('.veille-filters');
+
+            if (!grid || !filtersWrap) return;
+            if (grid.dataset.veilleBound === '1') return;
+            grid.dataset.veilleBound = '1';
+
+            function applyFilter(f) {
+                grid.querySelectorAll('.veille-article-card').forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    const show = f === 'all' || cat === f;
+                    card.style.display = show ? '' : 'none';
+                    if (!show) card.classList.remove('is-open');
+                });
+            }
+
+            filtersWrap.addEventListener('click', (e) => {
+                const btn = e.target.closest('.veille-filter-btn');
+                if (!btn) return;
+                const f = btn.getAttribute('data-filter');
+                filtersWrap.querySelectorAll('.veille-filter-btn').forEach(b => b.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                applyFilter(f);
+            });
+
+            grid.addEventListener('click', (e) => {
+                const card = e.target.closest('.veille-article-card');
+                if (!card) return;
+                // Toggle: un seul ouvert à la fois
+                const isOpen = card.classList.contains('is-open');
+                grid.querySelectorAll('.veille-article-card.is-open').forEach(c => c.classList.remove('is-open'));
+                if (!isOpen) card.classList.add('is-open');
+            });
+
+            // Filtre initial (bouton actif si présent)
+            const activeBtn = filtersWrap.querySelector('.veille-filter-btn.is-active') || filtersWrap.querySelector('.veille-filter-btn[data-filter="all"]');
+            if (activeBtn) applyFilter(activeBtn.getAttribute('data-filter'));
+        }
+
+        initVeille();
 
         // Contact Form (Simulation)
         const form = document.querySelector('.contact-form');
